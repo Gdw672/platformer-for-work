@@ -10,8 +10,6 @@ public class Jump : MonoBehaviour
     private int sumOfJump = 2;
     private Rigidbody2D playerBody;
     
-
-
     private void Start()
     {
         playerBody = GetComponent<Rigidbody2D>();
@@ -25,7 +23,8 @@ public class Jump : MonoBehaviour
     {
         if(sumOfJump > 0)
         {
-            playerBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            playerBody.velocity = Vector2.zero;
+            playerBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             sumOfJump -= 1;
         }
     }
