@@ -20,18 +20,18 @@ public class Dash : MonoBehaviour
         if(sumOfDash == 1)
         {
             isDash = true;
-            StartCoroutine(stopDashCop());
+            StartCoroutine(stopDashCop(0.4f));
             offButtons(true);
         }
     }
 
-    private IEnumerator stopDashCop()
+    private IEnumerator stopDashCop(float timeOfDash)
     {
         sumOfDash -= 1;
 
         playerBody.velocity = Vector2.zero;
 
-        playerBody.constraints = RigidbodyConstraints2D.FreezePositionY;
+        playerBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
 
         if(gameObject.transform.localScale.x > 0) 
         playerBody.velocity = new Vector2(dashPower, 0);
@@ -39,7 +39,7 @@ public class Dash : MonoBehaviour
         if(gameObject.transform.localScale.x < 0)
             playerBody.velocity = new Vector2(-dashPower, 0);
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(timeOfDash);
 
         playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
@@ -66,6 +66,7 @@ public class Dash : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         sumOfDash = 1;
+        StartCoroutine(stopDashCop(0f));
     }
 
     private void OnCollisionStay2D(Collision2D collision)

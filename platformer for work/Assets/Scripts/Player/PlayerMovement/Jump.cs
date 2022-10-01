@@ -17,6 +17,7 @@ public class Jump : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (gameObject.transform.position.y > collision.transform.position.y)
         sumOfJump = 2;
     }
     public void jump()
