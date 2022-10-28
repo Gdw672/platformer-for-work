@@ -6,6 +6,7 @@ public class PlatformsMove : MonoBehaviour
 {
     [SerializeField] private float speedOfPlatform;
     [SerializeField] private float distanceOfPlatform;
+    [SerializeField] private bool isVertical;
     private Rigidbody2D rigidbodyOfPlatform;
     private float platformPassed;
     private void Start()
@@ -17,7 +18,10 @@ public class PlatformsMove : MonoBehaviour
     {
         if(Mathf.Abs(platformPassed) < Mathf.Abs(distanceOfPlatform))
         {
-            rigidbodyOfPlatform.transform.Translate(speedOfPlatform, 0, 0);
+            if(!isVertical)
+                rigidbodyOfPlatform.transform.Translate(speedOfPlatform, 0, 0);
+            else
+                rigidbodyOfPlatform.transform.Translate(0, speedOfPlatform, 0);
             platformPassed += speedOfPlatform;
         }
         else

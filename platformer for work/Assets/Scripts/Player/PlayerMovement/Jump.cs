@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class Jump : MonoBehaviour
 {
+    
+    [SerializeField] private Vector2 directionJumpFromWall;
     [SerializeField] private float jumpForce;
-    [SerializeField] private List<string> allTagsToPlusJump;
     private int sumOfJump = 2;
     private Rigidbody2D playerBody;
+    
     
     private void Start()
     {
@@ -20,13 +22,28 @@ public class Jump : MonoBehaviour
         if (gameObject.transform.position.y > collision.transform.position.y)
         sumOfJump = 2;
     }
-    public void jump()
+
+    public void generalJump()
     {
-        if(sumOfJump > 0)
+        if (sumOfJump > 0 && !ClimbButton.getSingltone().gameObject.activeSelf)
         {
+            defaultJump();
+        }
+        if(ClimbButton.getSingltone().gameObject.activeSelf)
+        {
+            jumpFromWall();
+        }
+    }
+    private void defaultJump()
+    {
             playerBody.velocity = Vector2.zero;
             playerBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             sumOfJump -= 1;
-        }
+    }
+
+   private void jumpFromWall()
+    {
+        playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        playerBody.AddForce(directionJumpFromWall * 10f, ForceMode2D.Impulse);
     }
 }

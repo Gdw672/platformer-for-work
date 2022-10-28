@@ -22,7 +22,6 @@ public class Climbing : MonoBehaviour
     {
         rigidbodyOfPlayer.velocity = Vector2.zero;
         isPressed = false;
-        print("worked");
     }
 
     public void FreezePlayerY(bool isFreeze)
@@ -39,7 +38,6 @@ public class Climbing : MonoBehaviour
         if(isPressed)
         {
             rigidbodyOfPlayer.velocity = Vector2.up * speedOfClimg;
-            print("YES");
         }
     }
 
