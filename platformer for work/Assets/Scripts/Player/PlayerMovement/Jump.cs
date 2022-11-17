@@ -29,10 +29,6 @@ public class Jump : MonoBehaviour
         {
             defaultJump();
         }
-        if(ClimbButton.getSingltone().gameObject.activeSelf)
-        {
-            jumpFromWall();
-        }
     }
     private void defaultJump()
     {
@@ -41,9 +37,5 @@ public class Jump : MonoBehaviour
             sumOfJump -= 1;
     }
 
-   private void jumpFromWall()
-    {
-        playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        playerBody.AddForce(directionJumpFromWall * 10f, ForceMode2D.Impulse);
-    }
+   
 }

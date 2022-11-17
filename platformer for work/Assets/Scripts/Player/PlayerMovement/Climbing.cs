@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Climbing : MonoBehaviour
 {
+    [SerializeField] private float speedOfClimg;
+    private Walking walking;
     private Rigidbody2D rigidbodyOfPlayer;
     private bool isPressed;
-    [SerializeField] private float speedOfClimg;
     private void Start()
     {
+        walking = GetComponent<Walking>();
         rigidbodyOfPlayer = GetComponent<Rigidbody2D>();
         ClimbButton.getSingltone().velocityZero += VelocityZero;
     }
@@ -45,6 +45,8 @@ public class Climbing : MonoBehaviour
     {
         if(collision.gameObject.tag == "ClimbPlatform")
         {
+            rigidbodyOfPlayer.velocity = Vector2.zero;
+            walking.isPressed = false;
             ClimbButton.getSingltone().gameObject.SetActive(true);
         }
     }

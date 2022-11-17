@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -66,7 +65,10 @@ public class Dash : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         sumOfDash = 1;
-        StartCoroutine(stopDashCop(0f));
+        if(isDash)
+        {
+            StartCoroutine(stopDashCop(0f));
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

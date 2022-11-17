@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ClimbPlatform
+  - CameraPoint
+  - WindBlow
   layers:
   - Default
   - TransparentFX
